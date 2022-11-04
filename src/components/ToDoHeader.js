@@ -7,7 +7,7 @@ const ToDoHeaderDiv = styled.div`
   h2{margin-bottom: 50px};
   .tabmenu{ display: flex; cursor:pointer};
   .tabmenu div {
-    flex: 0 0 100px;
+    flex: 0 0 120px;
     padding: 6px;
     font-size: 15px;
     font-weight: 500;
@@ -35,6 +35,7 @@ export default function ToDoHeader({tabList, tabState, changeTab}){
         title={title} 
         label={label}
         checked={checked}
+        tabState={tabState}
         changeTab={changeTab} 
         />
       ))}

@@ -23,12 +23,12 @@ export default function ToDoCotainer(){
   // 입력창에 담을 state
   const [todoList, setTodoList] = useState([]);
   // check 여부를 확인할 리스트 state
-  const [check, setCheck] = useState(false);
+  // const [check, setCheck] = useState(false);
   // 헤더
   const tabList = [
     {title: 'All 📑📌', label: 'All', id: 1, checked: null},
-    {title: 'Done 🙆‍♀️', label: 'Done', id: 2, checked: true},
-    {title: 'Undone 🙅‍♀️', label: 'Undone', id: 3, checked: false}
+    {title: 'Complete 🙆‍♀️', label: 'Complete', id: 2, checked: true},
+    {title: 'Active 🙅‍♀️', label: 'Active', id: 3, checked: false}
   ];
   const [tabState, setTabState] = useState('All');
   const changeTab = (tabState) => {
@@ -39,11 +39,9 @@ export default function ToDoCotainer(){
     <ToDoCotainerDiv>
         <ToDoHeader tabList={tabList} tabState={tabState} changeTab={changeTab} />
         <ToDoList  
-         tabList={tabList} 
          tabState={tabState}
-        todoList={todoList}
-        setTodoList={setTodoList}
-        check={check}
+          todoList={todoList}
+          setTodoList={setTodoList}
         />
         <ToDoCreate  todoList={todoList} setTodoList={setTodoList} />
     </ToDoCotainerDiv>

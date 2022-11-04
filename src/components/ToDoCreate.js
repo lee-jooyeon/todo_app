@@ -59,7 +59,9 @@ const ToDoCreateDiv = styled.div`
   .submit svg {
     color: #ffffff;
     font-size: 30px;
-    height: 52px;
+    height: 60px;
+    padding-left: 5px;
+  }
   }
   .plus_btn {
     position: absolute;
@@ -123,8 +125,8 @@ export default function ToDoCreate ({todoList, setTodoList}) {
           />
         </div>
         <button 
-        type="submit" 
-        className="submit"
+          type="submit" 
+          className="submit"
         >
           <MdOutlinePlaylistAdd />    
         </button>

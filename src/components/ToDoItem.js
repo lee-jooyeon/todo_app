@@ -66,9 +66,8 @@ const ToDoItemDiv = styled.div`
     }
 `;
 
-export default function ToDoItem({item, todoList, setTodoList}){
+export default function ToDoItem({tabState, item, todoList, setTodoList}){
   const [checked, setChecked] = useState(false);
-  // const [label, setLabel] = useState('Done');
 
   const onChangeCheck = () => {
     const addTodoList = todoList.map((list) => ({
@@ -77,6 +76,8 @@ export default function ToDoItem({item, todoList, setTodoList}){
     }));
     setTodoList(addTodoList); 
   }
+
+  console.log(tabState); 
 
     return(
       <ToDoItemDiv>
@@ -88,7 +89,6 @@ export default function ToDoItem({item, todoList, setTodoList}){
           onChange = {() => {
             onChangeCheck();
             setChecked(!checked);
-            // setLabel('Undone');
           }}
           checked={item.checked}
           />
