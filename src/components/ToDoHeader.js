@@ -10,7 +10,7 @@ const ToDoHeaderDiv = styled.div`
     flex: 0 0 120px;
     padding: 6px;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
     border-radius: 8px;
   }
@@ -25,6 +25,7 @@ export default function ToDoHeader({tabList, tabState, changeTab}){
   });
 
   const day = date.toLocaleDateString('en-US', {weekday: 'long'});
+
   return(
     <ToDoHeaderDiv>
       <h1 className="date">{dateIs}</h1>

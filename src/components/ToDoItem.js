@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import {
   MdDone,
+  MdOutlineCheck,
   MdModeEdit,
   MdDelete,
 } from 'react-icons/md';
@@ -9,7 +10,7 @@ import {
 const ToDoItemDiv = styled.div`
   display:flex;
   margin-bottom: 15px;
-    label{
+    .item_wrap{
       position: relative;
       display: flex;
     }
@@ -64,10 +65,24 @@ const ToDoItemDiv = styled.div`
       font-weight: 500;
       color: #000000;
     }
+    .edit_input {
+      width: 300px;
+      margin-left: 15px;
+      border: none;
+      border-bottom: 2px solid #f1f3f5;
+      padding: 5px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+    .edit_input:focus {
+      outline: none;
+    }
 `;
 
-export default function ToDoItem({tabState, item, todoList, setTodoList}){
-  const [checked, setChecked] = useState(false);
+export default function ToDoItem({item, todoList, setTodoList}){
+  const [edit, setEdit] = useState(false);
+  const [newText, setNewText] = useState(item.text);
+  const editInputRef = useRef(null);
 
   const onChangeCheck = () => {
     const addTodoList = todoList.map((list) => ({
@@ -77,28 +92,95 @@ export default function ToDoItem({tabState, item, todoList, setTodoList}){
     setTodoList(addTodoList); 
   }
 
-  console.log(tabState); 
+  const onClickEditHandler = () => {
+    setEdit(true);
+  };
 
-    return(
-      <ToDoItemDiv>
+  // 새 text를 넣을 input
+  const onChangeEditInput = (e) => {
+    setNewText(e.target.value);
+  };
+
+  // edit event
+  const onClickSubmitHandler = () => {
+    const addTodoList = todoList.map((list) => ({
+      ...list,
+      text: list.id === item.id ? newText : list.text // 새로운 아이템 내용을 넣어줌
+    }));
+    setTodoList(addTodoList);
+    setEdit(false);
+  };  
+
+  // delete event
+  const onClickDelete = () => {
+    window.alert('Are you sure you want to delete?');
+    const addTodoList = todoList.filter((list) => list.id !== item.id);
+    setTodoList(addTodoList);
+  }
+
+    // input focusing
+    useEffect(() => {
+      if(edit){
+        editInputRef.current.focus();
+      }
+    }, [edit]);
+
+  return(
+    <ToDoItemDiv>
         {/* 체크박스 */}
-        <label>
+        <label className='item_wrap'>
           <input
-          type="checkbox"
-          className="checkbox"
-          onChange = {() => {
-            onChangeCheck();
-            setChecked(!checked);
-          }}
-          checked={item.checked}
+            type="checkbox"
+            className="checkbox"
+            checked={item.checked}
+            onChange = {onChangeCheck}
           />
           {item.checked && <MdDone className="checked_icon" /> }
           {/* 아이템내용 */}
-          <div className={`text ${item.checked ? 'text-checked' : ''}`}>{item.text}</div>
+          {/* <div className={`text ${item.checked ? 'text-checked' : ''}`}>{item.text}</div> */}
+
+          {edit ? ( 
+            <input 
+              className='edit_input'
+              type="text"
+              value={newText}
+              ref={editInputRef}
+              onChange={onChangeEditInput}
+              // onKeyPress={onClickSubmitHandler}
+              /> 
+              ) : (
+                <div className={`text ${item.checked ? 'text-checked' : ''}`}>
+                  {item.text}
+                </div>
+              )
+            }
         </label>
         {/* 수정버튼 */}
-        <button type="button" className="edit"><MdModeEdit /></button>
-        <button type="button" className="remove"><MdDelete/></button>
+        {edit ? (
+              <button 
+              type="button" 
+              className="edit"
+              onClick={onClickSubmitHandler}
+              >
+              <MdOutlineCheck />
+            </button>
+            ) : 
+            (
+              <button 
+              type="button" 
+              className="edit" 
+              onClick={onClickEditHandler}
+              >
+              <MdModeEdit />
+              </button>
+            )}
+            {/* 삭제버튼 */}
+            <button 
+              type="button" 
+              className="remove"
+              onClick={onClickDelete}
+              ><MdDelete/>
+            </button>
       </ToDoItemDiv>
-    )
+  )
 }

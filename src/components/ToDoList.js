@@ -20,7 +20,6 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
                   key={item.id}
                   item={item}
                   todoList={todoList}
-                  tabState={tabState}
                   setTodoList={setTodoList}
               />
               )
@@ -30,7 +29,6 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
                   key={item.id}
                   item={item}
                   todoList={todoList}
-                  tabState={tabState}
                   setTodoList={setTodoList}
               />
               )
@@ -50,7 +48,6 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
                   key={item.id}
                   item={item}
                   todoList={todoList}
-                  tabState={tabState}
                   setTodoList={setTodoList}
               />
               )
@@ -60,7 +57,6 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
                   key={item.id}
                   item={item}
                   todoList={todoList}
-                  tabState={tabState}
                   setTodoList={setTodoList}
               />
               )
@@ -80,7 +76,6 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
                   key={item.id}
                   item={item}
                   todoList={todoList}
-                  tabState={tabState}
                   setTodoList={setTodoList}
               />
               )
@@ -90,7 +85,6 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
                   key={item.id}
                   item={item}
                   todoList={todoList}
-                  tabState={tabState}
                   setTodoList={setTodoList}
               />
               )

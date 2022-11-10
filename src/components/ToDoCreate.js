@@ -22,7 +22,7 @@ const ToDoCreateDiv = styled.div`
     display: flex;
     position: absolute;
     bottom: 30px;
-    padding: 0px 20px;
+    padding: 0px 20px 0px 25px;
     animation: ${slideDown} 0.3s ease-out;
   }
   .input_box {
@@ -65,7 +65,7 @@ const ToDoCreateDiv = styled.div`
   }
   .plus_btn {
     position: absolute;
-    right: 30px;
+    right: 25px;
     bottom: 100px;
     width: 75px;
     height: 75px;
@@ -92,14 +92,14 @@ export default function ToDoCreate ({todoList, setTodoList}) {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if(text !== ''){
+    if(text !== '' && todoList.length < 7){
     const addTodoList = todoList.concat({
       id: todoList.length,
       text,
       checked: false,
     });
     setTodoList(addTodoList);
-
+    console.log(todoList.length);
     setText('');
     }};
 
@@ -113,7 +113,8 @@ export default function ToDoCreate ({todoList, setTodoList}) {
 
   return(
     <ToDoCreateDiv>
-      {onOpen ? <form className="input_form" onSubmit={onSubmitHandler}>
+      {onOpen ? 
+      <form className="input_form" onSubmit={onSubmitHandler}>
         <div className="input_box">
           <input
           type="text"

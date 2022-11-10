@@ -3,12 +3,13 @@ import {useState} from "react";
 import ToDoHeader from "./ToDoHeader";
 import ToDoList from "./ToDoList";
 import ToDoCreate from "./ToDoCreate";
+import ToDoProgress from "./ToDoProgress";
 import styled from 'styled-components';
 
 const ToDoCotainerDiv = styled.div`
   width: 512px;
   max-height: 900px;
-  min-height: 800px;
+  min-height: 900px;
   position:absolute;
   top:50%;
   left:50%;
@@ -27,8 +28,8 @@ export default function ToDoCotainer(){
   // 헤더
   const tabList = [
     {title: 'All 📑📌', label: 'All', id: 1, checked: null},
-    {title: 'Complete 🙆‍♀️', label: 'Complete', id: 2, checked: true},
-    {title: 'Active 🙅‍♀️', label: 'Active', id: 3, checked: false}
+    {title: 'Active 🙅‍♀️', label: 'Active', id: 3, checked: false},
+    {title: 'Complete 🙆‍♀️', label: 'Complete', id: 2, checked: true}
   ];
   const [tabState, setTabState] = useState('All');
   const changeTab = (tabState) => {
@@ -38,8 +39,12 @@ export default function ToDoCotainer(){
   return(
     <ToDoCotainerDiv>
         <ToDoHeader tabList={tabList} tabState={tabState} changeTab={changeTab} />
+        <ToDoProgress  
+          todoList={todoList}
+          setTodoList={setTodoList}
+        />
         <ToDoList  
-         tabState={tabState}
+          tabState={tabState}
           todoList={todoList}
           setTodoList={setTodoList}
         />
