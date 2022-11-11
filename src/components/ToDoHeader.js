@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 const ToDoHeaderDiv = styled.div`
   padding: 50px 30px 15px;
-  h2{margin-bottom: 50px};
+  h2{
+    margin-bottom: 40px
+  };
   .tabmenu{ display: flex; cursor:pointer};
   .tabmenu div {
     flex: 0 0 120px;

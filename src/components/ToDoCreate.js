@@ -9,11 +9,11 @@ import {
 const slideDown = keyframes`
   from {
    opacity: 0;
-   bottom: 110px
+   bottom: 120px
   }
   to {
     opacity: 1;
-    bottom: 30px;
+    bottom: 50px;
   }
  `;
 
@@ -21,7 +21,7 @@ const ToDoCreateDiv = styled.div`
   .input_form { 
     display: flex;
     position: absolute;
-    bottom: 30px;
+    bottom: 50px;
     padding: 0px 20px 0px 25px;
     animation: ${slideDown} 0.3s ease-out;
   }
@@ -66,7 +66,7 @@ const ToDoCreateDiv = styled.div`
   .plus_btn {
     position: absolute;
     right: 25px;
-    bottom: 100px;
+    bottom: 120px;
     width: 75px;
     height: 75px;
     background: #99ccff;
