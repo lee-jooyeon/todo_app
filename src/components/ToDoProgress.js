@@ -1,5 +1,5 @@
-// import img from '/todo_app/assets/img/whale.png;'
-import LinearProgress from "@mui/material/LinearProgress";
+// import LinearProgress from "@mui/material/LinearProgress";
+import { useEffect, useState } from "react";
 import styled from 'styled-components';
 
 const ToDoProgressDiv = styled.div`
@@ -17,7 +17,7 @@ const ToDoProgressDiv = styled.div`
     .img_box {
       position: absolute;
       top: -22px;
-      right: 0px;
+      right: -8px;
       z-index: 1;
     }
     .whale {
@@ -34,27 +34,66 @@ const ToDoProgressDiv = styled.div`
       background:#99ccff;
       border-radius: 30px;
     }
+    .progress{
+      position:relative;
+      height: 5px;
+      border-radius: 25px;
+      background:#dddddd;
+    }
+    .percent{
+      position: absolute;
+      bottom: 28px;
+      right: -10px;
+      width: 60px;
+      height: 35px;
+      text-align: center;
+      line-height: 35px;
+      border-radius: 25px;
+      background: #99ccff;
+      color: #ffffff;
+      font-weight: 600;
+    }
 `;
 
-
-export default function ToDoProgress({item, todoList, setTodoList}){
+export default function ToDoProgress({todoList}){
   const length = todoList.length // todo-list의 전체 길이
-  const Completed = todoList.filter((item) => item.checked === true).length; // 완료된 todo-list 출력
+  const completed = todoList.filter((item) => item.checked === true).length; // 완료된 todo-list 출력
+  const percentage = Math.ceil((completed / length) * 100);
 
   return(
     <ToDoProgressDiv>
       <div className='progress_bar'>
         <div className='img_box'>
-          <img className="whale" src="https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/spouting-whale_1f433.png" width="60" height="60" />
+          <img className="whale" src="https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/spouting-whale_1f433.png" alt="icon" width="60" height="60" />
         </div>
-        <LinearProgress
+        <div 
+          className="progress"
+        >
+          {isNaN(percentage) ? 
+          (<span className="percent"> 0% </span>) : (          
+          <div 
+            className="progress-filled"
+            style={{
+              height: "100%",
+              width: `${percentage && percentage ? percentage : 0 }%`,
+              background:'#99ccff',
+              transition: "width 0.5s",
+              borderRadius: "25px",
+            }}
+          >
+            <span className="percent">{percentage}%</span>
+          </div>)}
+        </div>
+        {/* mui로 이용한 progress bar */}
+        {/* <LinearProgress
           className="progress"
           variant="determinate"
-          value={Completed / length * 100}
-          ></LinearProgress>
+          value={completed / length * 100}
+          /> */}
       </div>
       <div className='count'>
-        {length} <span className="text">out of</span> {Completed} <span className="text">completed</span>
+        {length} 
+        <span className="text">out of</span> {completed} <span className="text">completed</span>
       </div>
   </ToDoProgressDiv>
   )

@@ -9,10 +9,10 @@ const ToDoListDiv = styled.div`
 export default function ToDoList({ tabState,  todoList, setTodoList}){
   const checked = todoList.filter((item) => item.checked === true); // 완료된 리스트만
   const unchecked = todoList.filter((item) => item.checked === false); // 진행중인 리스트만
-  if(tabState === 'All') {
-    return(
-      <ToDoListDiv> 
-        <ul>
+  return(
+    <ToDoListDiv>
+        {tabState === 'All' ? (
+          <ul>
           {todoList && todoList.map((item) => {
             if(!item.checked){
               return(
@@ -34,13 +34,9 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
               )
             }
           })}
-        </ul>
-      </ToDoListDiv>
-      )
-  } else if(tabState === 'Complete'){
-    return(
-      <ToDoListDiv> 
-        <ul>
+        </ul>) : null }
+        {tabState === 'Complete' ? (      
+          <ul>
           {todoList && checked.map((item) => {
             if(!item.checked){
               return(
@@ -62,13 +58,9 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
               )
             }
           })}
-        </ul>
-    </ToDoListDiv>
-      )
-  } else {
-    return(
-      <ToDoListDiv> 
-        <ul>
+        </ul>) : null}
+        {tabState === 'Active' ? (      
+          <ul>
           {todoList && unchecked.map((item) => {
             if(!item.checked){
               return(
@@ -90,8 +82,7 @@ export default function ToDoList({ tabState,  todoList, setTodoList}){
               )
             }
           })}
-        </ul>
+        </ul>) : null}
     </ToDoListDiv>
-      )
-  }
+    )
   }

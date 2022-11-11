@@ -113,9 +113,10 @@ export default function ToDoItem({item, todoList, setTodoList}){
 
   // delete event
   const onClickDelete = () => {
-    window.alert('Are you sure you want to delete?');
-    const addTodoList = todoList.filter((list) => list.id !== item.id);
-    setTodoList(addTodoList);
+    if(window.confirm('Are you sure you want to delete?')){
+      const addTodoList = todoList.filter((list) => list.id !== item.id);
+      setTodoList(addTodoList);
+    }    
   }
 
     // input focusing
@@ -138,7 +139,6 @@ export default function ToDoItem({item, todoList, setTodoList}){
           {item.checked && <MdDone className="checked_icon" /> }
           {/* 아이템내용 */}
           {/* <div className={`text ${item.checked ? 'text-checked' : ''}`}>{item.text}</div> */}
-
           {edit ? ( 
             <input 
               className='edit_input'
