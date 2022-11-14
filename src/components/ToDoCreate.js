@@ -84,6 +84,7 @@ const ToDoCreateDiv = styled.div`
 
 export default function ToDoCreate ({todoList, setTodoList}) {
   const [text, setText] = useState('');
+  const [id, setId] = useState(0); // id 
   const [onOpen, setOnOpen] = useState(false);
 
   const onChangeText = (e) => {
@@ -94,27 +95,42 @@ export default function ToDoCreate ({todoList, setTodoList}) {
     e.preventDefault();
     if(text !== '' && todoList.length < 7){
     const addTodoList = todoList.concat({
-      id: todoList.length,
+      id: id,
       text,
       checked: false,
     });
+    localStorage.setItem('todolists', JSON.stringify(addTodoList));
     setTodoList(addTodoList);
-    console.log(todoList.length);
+    setId((id) => id + 1);
+    // console.log(todoList.length);
     setText('');
     }};
 
-    const onClickHandler = () => {
-      setOnOpen(!onOpen);
-    }
+    useEffect(() => {
+      const localItems = localStorage.getItem('todolists');
+      if(localItems){
+        setTodoList(JSON.parse(localItems));
+      }
+      const localId = localStorage.getItem('id');
+      if(localId) {
+        setId(parseInt(localId));
+      }
+    }, []);
 
-  useEffect(() => {
-    console.log(todoList);
-  }, [todoList]);
+  const onClickHandler = () => {
+    setOnOpen(!onOpen);
+  }
+
+  // useEffect(() => {
+  //   console.log(todoList);
+  // }, [todoList]);
 
   return(
     <ToDoCreateDiv>
       {onOpen ? 
-      <form className="input_form" onSubmit={onSubmitHandler}>
+      <form
+        className="input_form" 
+        onSubmit={onSubmitHandler}>
         <div className="input_box">
           <input
           type="text"

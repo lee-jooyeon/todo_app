@@ -90,6 +90,7 @@ export default function ToDoItem({item, todoList, setTodoList}){
       checked: list.id === item.id ? !list.checked: list.checked,
     }));
     setTodoList(addTodoList); 
+    localStorage.setItem('todolists', JSON.stringify(addTodoList));
   }
 
   const onClickEditHandler = () => {
@@ -108,6 +109,7 @@ export default function ToDoItem({item, todoList, setTodoList}){
       text: list.id === item.id ? newText : list.text // 새로운 아이템 내용을 넣어줌
     }));
     setTodoList(addTodoList);
+    localStorage.setItem('todolists', JSON.stringify(addTodoList));
     setEdit(false);
   };  
 
@@ -116,6 +118,7 @@ export default function ToDoItem({item, todoList, setTodoList}){
     if(window.confirm('Are you sure you want to delete?')){
       const addTodoList = todoList.filter((list) => list.id !== item.id);
       setTodoList(addTodoList);
+      localStorage.setItem('todolists', JSON.stringify(addTodoList));
     }    
   }
 
